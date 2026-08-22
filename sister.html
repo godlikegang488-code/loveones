@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>For Sapna Didi ❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* ---------------- FIRST PAGE ---------------- */
+
+        #firstPage {
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            background: linear-gradient(135deg, #ff6b9a, #ff9a9e);
+
+            color: white;
+        }
+
+        #firstPage h1 {
+            font-size: 35px;
+            line-height: 1.3;
+            margin: 20px;
+        }
+
+        #firstPage p {
+            font-size: 20px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 15px 30px;
+
+            border: none;
+            border-radius: 30px;
+
+            background: white;
+            color: #ff4081;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.08);
+        }
+
+
+        /* ---------------- HEART PAGE ---------------- */
+
+        #heartPage {
+            display: none;
+
+            width: 100%;
+            height: 100vh;
+
+            background: black;
+
+            position: fixed;
+            top: 0;
+            left: 0;
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        #heartCanvas {
+            width: 700px;
+            height: 500px;
+
+            max-width: 95vw;
+            max-height: 80vh;
+        }
+
+        #message {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            color: white;
+
+            font-size: 18px;
+            font-weight: bold;
+
+            opacity: 0;
+
+            transition: opacity 2s;
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ============================= -->
+    <!-- FIRST PAGE -->
+    <!-- ============================= -->
+
+    <div id="firstPage">
+
+        <h1>
+            WHO IS THE BEST SISTER
+            <br>
+            IN THIS WORLD? ❤️
+        </h1>
+
+        <p>
+            Find here the answer 👀👇
+        </p>
+
+        <button onclick="showHeart()">
+            FIND HERE THE ANSWER 💖
+        </button>
+
+    </div>
+
+
+
+    <!-- ============================= -->
+    <!-- HEART PAGE -->
+    <!-- ============================= -->
+
+    <div id="heartPage">
+
+        <canvas id="heartCanvas"></canvas>
+
+        <div id="message">
+            HAPPY RAKSHA BANDHAN ❤️
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        /* ==================================
+           BUTTON CLICK
+        ================================== */
+
+        function showHeart() {
+
+            document.getElementById("firstPage").style.display = "none";
+
+            document.getElementById("heartPage").style.display = "flex";
+
+            drawHeart();
+
+        }
+
+
+
+        /* ==================================
+           HEART ANIMATION
+        ================================== */
+
+        function drawHeart() {
+
+            const canvas = document.getElementById("heartCanvas");
+
+            const ctx = canvas.getContext("2d");
+
+
+            canvas.width = 700;
+            canvas.height = 500;
+
+
+            ctx.font = "bold 8px Arial";
+
+            ctx.textAlign = "center";
+
+            ctx.textBaseline = "middle";
+
+            ctx.fillStyle = "#ffb6c1";
+
+
+            let points = [];
+
+
+            /* ==================================
+               CREATE HEART POINTS
+            ================================== */
+
+            for (let scale = 11; scale <= 16; scale++) {
+
+                for (let i = 0; i < 120; i++) {
+
+                    let angle =
+                        i * (Math.PI * 2) / 120;
+
+
+                    let x =
+                        16 *
+                        Math.pow(Math.sin(angle), 3) *
+                        scale;
+
+
+                    let y =
+                        (
+                            13 * Math.cos(angle)
+                            - 5 * Math.cos(2 * angle)
+                            - 2 * Math.cos(3 * angle)
+                            - Math.cos(4 * angle)
+                        ) * scale;
+
+
+                    points.push({
+
+                        x: canvas.width / 2 + x,
+
+                        y: canvas.height / 2 - y
+
+                    });
+
+                }
+
+            }
+
+
+
+            /* ==================================
+               START ANIMATION
+            ================================== */
+
+            let index = 0;
+
+
+            function animateHeart() {
+
+                if (index < points.length) {
+
+                    const point = points[index];
+
+
+                    ctx.fillText(
+
+                        "SAPNA DIDI",
+
+                        point.x,
+
+                        point.y
+
+                    );
+
+
+                    index++;
+
+
+                    setTimeout(
+
+                        animateHeart,
+
+                        10
+
+                    );
+
+                }
+
+                else {
+
+                    showMessage();
+
+                }
+
+            }
+
+
+            animateHeart();
+
+        }
+
+
+
+        /* ==================================
+           SHOW MESSAGE
+        ================================== */
+
+        function showMessage() {
+
+            const message =
+                document.getElementById("message");
+
+
+            message.style.opacity = "1";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
